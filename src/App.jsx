@@ -22,13 +22,13 @@ function App() {
 
     const click$ = fromEvent(waitBtn, 'click');
 
-    click$.pipe(
+    const doubleClick$ = click$.pipe(
       buffer(click$.pipe(debounceTime(300))),
       map(clicks => clicks.length),
       filter(clicksLength => clicksLength === 2),
     );
 
-    click$.subscribe(() => pause());
+    doubleClick$.subscribe(() => pause());
   }, []);
 
   const start = () => setStatus('run');
